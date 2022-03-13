@@ -5,7 +5,7 @@ Game.io ทำขึ้นเพื่อสอนมือใหม่ในก
 2. nodejs : https://nodejs.org/
 
 CMD download Game.io
-1. git clone https://github.com/kuangdev/socket-game-chat.io
+1. git clone https://github.com/kuangdev/socket-game-chat.io.git
 2. cd socket-game-chat.io
 3. npm install
 4. npm start
