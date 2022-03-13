@@ -57,10 +57,10 @@ io.on('connection', (socket) => {
 
   socket.on('register', (data) => {  
     if(!players.find(item => item.id==data.id)){
-      players.push({ id:data.id, name:data.name, x:data.x, y:data.y });
+      players.push({ id:data.id, name:data.name.substring(0, 50), x:data.x, y:data.y });
     }
-    io.emit('online', {newPlayer:{ id:data.id, name:data.name, x:data.x, y:data.y },players});
-    io.emit('alert', { status: 'info',msg: `ผุ้เล่น:  ${ data.name } ออนไลน์` });
+    io.emit('online', {newPlayer:{ id:data.id, name:data.name.substring(0, 50), x:data.x, y:data.y },players});
+    io.emit('alert', { status: 'info',msg: `ผุ้เล่น:  ${ data.name.substring(0, 50) } ออนไลน์` });
   });
 
   socket.on('stand', (data) => {
@@ -80,7 +80,7 @@ io.on('connection', (socket) => {
   socket.on('chat', async (data) => {
     if(!data.msg) return;
     const player = await players.find(item=>item.id==socket.id);
-    io.emit('chat', { ...player, msg:data.msg });
+    io.emit('chat', { ...player, msg:data.msg.substring(0, 200) });
   });
   
 });

@@ -248,7 +248,7 @@
                     <div class="card-footer">
                         <form id="form-chat" action="#"> 
                             <div class="input-group">
-                                <input type="text" id="chat-input" class="form-control" placeholder="พิมพ์อะไรซักหน่อย" aria-label="พิมพ์อะไรซักหน่อย" autocomplete="off">
+                                <input type="text" id="chat-input" class="form-control" placeholder="พิมพ์อะไรซักหน่อย" aria-label="พิมพ์อะไรซักหน่อย" maxlength="200" autocomplete="off">
                                 <button class="btn btn-primary" type="submit"> <i class="bi bi-send"></i> </button>
                             </div>
                         </form>
@@ -450,7 +450,7 @@
         $('#form-chat').on('submit',function(e){ // #form-chat on  submit
             e.preventDefault();
             var txtname = $('#myname').val();
-            var txtmsg = $('#chat-input').val();	
+            var txtmsg = $('#chat-input').val().substring(0, 200);	
             socket.emit('chat', { msg: txtmsg });
             $('#chat-input').val('');
             $('#chat-input').focus();
