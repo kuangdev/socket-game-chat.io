@@ -551,15 +551,16 @@
                     playerAction.init(item.id, item.name, item.x, item.y, socket.id == item.id);
                 });
                 $('.player-online').text(players.length);
-                const p_left = players.find(item=>item.id==socket.id).x;
+                const p_left = await players.find(item=>item.id==socket.id).x;
                 $('#game-zone').scrollLeft(p_left - ($('#game-zone').width() / 2));
             }else{
                 playerAction.init(newPlayer.id, newPlayer.name, newPlayer.x, newPlayer.y, socket.id == newPlayer.id);
             }          
         });
 
-        socket.on('offline',  async (id)=>{
-            playerAction.remove(id);        
+        socket.on('offline',  async ({ id , playeronline})=>{
+            $('.player-online').text(playeronline);
+            playerAction.remove(id);
         });
         
 

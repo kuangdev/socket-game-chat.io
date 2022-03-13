@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
   console.log(socket.id);
   socket.on('disconnect', async () => {
     players = await players.filter(item=>item.id!=socket.id);
-    io.emit('offline', socket.id);
+    io.emit('offline', {id:socket.id, playeronline: players.length});
   });
 
   socket.on('register', (data) => {  
