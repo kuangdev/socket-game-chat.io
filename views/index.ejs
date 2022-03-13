@@ -555,6 +555,7 @@
                 $('#game-zone').scrollLeft(p_left - ($('#game-zone').width() / 2));
             }else{
                 playerAction.init(newPlayer.id, newPlayer.name, newPlayer.x, newPlayer.y, socket.id == newPlayer.id);
+                $('.player-online').text(players.length);
             }          
         });
 
