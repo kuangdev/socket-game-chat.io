@@ -1,5 +1,7 @@
 Game.io ทำขึ้นเพื่อสอนมือใหม่ในการใช้ Socker.io - ExpressJS โดย Kuang.dev
 
+Demo : https://gamechatio.herokuapp.com/
+
 **การติดตั้งจำเป็นต้อง install**
 1. git : https://git-scm.com/
 2. nodejs : https://nodejs.org/
