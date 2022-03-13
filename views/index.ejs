@@ -340,7 +340,10 @@
 
             },
             move(data){
-                const this_obj = $('#game').find('#'+data.id);
+                let this_obj = game.find('.player.my');
+                if(!data.my){
+                    this_obj = $('#game').find('#'+data.id);
+                }
                 if(data.my && this_obj.find('img').attr('src') == 'images/player/myplayer_stand.gif'){
                     this_obj.find('img').attr('src','images/player/myplayer_move.gif');                    
                 }else if(this_obj.find('img').attr('src') == 'images/player/player_stand.gif'){
@@ -418,18 +421,22 @@
                     my_y = parseInt(my_y || 0);
                     if(my_y > 0 && obj_up){
                         my_y-=move_speed;
+                        playerAction.move({x : my_x, y : my_y, my: true })
                         socket.emit('move', {x : my_x, y : my_y})
                     }
                     if(my_y < (parseInt(max_y)-30) && obj_down){ 
                         my_y+=move_speed;
+                        playerAction.move({x : my_x, y : my_y, my: true })
                         socket.emit('move', {x : my_x, y : my_y})
                     }
                     if(my_x >0 && obj_left){ 
                         my_x-=move_speed;
+                        playerAction.move({x : my_x, y : my_y, my: true })
                         socket.emit('move', {x : my_x, y : my_y})
                     }
                     if(my_x < (parseInt(max_x)-30) && obj_right){ 
                         my_x+=move_speed;
+                        playerAction.move({x : my_x, y : my_y, my: true })
                         socket.emit('move', {x : my_x, y : my_y})
                     }
                     focusMyPlayer();
@@ -562,7 +569,9 @@
         });
 
         socket.on('move', (player)=>{
-            playerAction.move({...player, my: socket.id == player.id })
+            if(socket.id != player.id){
+                playerAction.move({...player, my: socket.id == player.id })
+            }
         });
 
         socket.on('chat', (player)=>{
