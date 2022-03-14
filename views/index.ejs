@@ -307,7 +307,7 @@
         var obj_right = false;
         var my_x = 0;
         var my_y = 0;
-        const move_speed = 12;
+        const move_speed = 10;
         const game_speed = 100; 
         var gamestarted= false;  
         const playerAction = {
@@ -554,7 +554,9 @@
                 });
                 $('.player-online').text(players.length);
                 const p_left = await players.find(item=>item.id==socket.id).x;
-                $('#game-zone').scrollLeft(p_left - ($('#game-zone').width() / 2));
+                setTimeout(() => {
+                    $('#game-zone').scrollLeft(p_left - ($('#game-zone').width() / 2));
+                }, 100);
             }else{
                 playerAction.init(newPlayer.id, newPlayer.name, newPlayer.x, newPlayer.y, socket.id == newPlayer.id);
                 $('.player-online').text(players.length);
