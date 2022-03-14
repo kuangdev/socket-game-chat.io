@@ -123,15 +123,18 @@
             /* z-index: 4; */
         }
         .select-disable {-webkit-user-select: none;  -khtml-user-select: none;   -moz-user-select: none; -o-user-select: none;    user-select: none; }
+        .footer-credit{
+            position: fixed;
+            width: 100%;
+            bottom: 0px;
+            font-size: 14px;
+            z-index: 100;
+        }
         @media (max-width: 576px) {
-            .btn-console{ z-index: 5; }
             .footer-credit{
-                position: fixed;
-                width: 100%;
-                bottom: 0px;
                 font-size: 10px;
-                z-index: 100;
             }
+            .btn-console{ z-index: 5; }
             .footer-credit a{ font-size: 10px; }
             #form-chat{ 
                 position: fixed;
@@ -151,7 +154,7 @@
 
 <body>
     
-    <div class="container-fluid mt-3" style="padding-bottom: 70px;">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-sm-9">
                 <div class="card">
@@ -294,20 +297,20 @@
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.2/underscore-umd-min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io();        
-        var game = $('#game');
-        var max_x = game.width();
-        var max_y = game.height();
+        const socket = io();
+        const game = $('#game');
+        const max_x = game.width();
+        const max_y = game.height();
         var obj_up = false;
         var obj_down = false;
         var obj_left = false;
         var obj_right = false;
         var my_x = 0;
         var my_y = 0;
-        var move_speed = 8;
-        var game_speed = 100; 
+        const move_speed = 12;
+        const game_speed = 100; 
         var gamestarted= false;  
-        var playerAction = {
+        const playerAction = {
             init(id,name,x,y,my){
                 let _my = "";
                 if(my == "1"){
@@ -387,7 +390,7 @@
                 if($('#chat-his').find('p').length > 30){
                     $('#chat-his').find('p').eq(0).remove();
                 }
-		        document.getElementById('chat-his').scrollTop = document.getElementById('chat-his').scrollHeight;
+                document.getElementById('chat-his').scrollTop = document.getElementById('chat-his').scrollHeight;
             },
             remove(id){
                 $('#'+id).remove();
@@ -402,10 +405,10 @@
             const game_w = $('#game').width();
             if(p_left - gamezone_sl < 80 && p_left > 80){
                 console.log('left...')
-                $('#game-zone').scrollLeft(gamezone_sl - (move_speed+2));
+                $('#game-zone').scrollLeft(gamezone_sl - (move_speed+4));
             }else if((p_left - (gamezone_w+gamezone_sl))  > -100 && (game_w-p_left) > 100){
                 console.log('right...')
-                $('#game-zone').scrollLeft(gamezone_sl + (move_speed+2));
+                $('#game-zone').scrollLeft(gamezone_sl + (move_speed+4));
             }
         }
 
@@ -443,7 +446,7 @@
             },game_speed);
         }  
         
-      
+    
     
     //===============even===========================================================
     
@@ -489,7 +492,7 @@
         .on('mouseleave',sendStand)
         .on('touchend',sendStand);
 
-      
+    
 
 
     //===============Socket Even===========================================================
