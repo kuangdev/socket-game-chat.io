@@ -547,7 +547,6 @@
         });
 
         socket.on('online',  async ({ newPlayer, players })=>{
-            console.log(newPlayer, players);
             if(newPlayer.id == socket.id){
                 $('.player').remove();
                 players.forEach((item,index)=>{
@@ -569,7 +568,6 @@
         
 
         socket.on('stand', (player)=>{
-            console.log(player);
             playerAction.stand({...player, my: socket.id == player.id })
         });
 
