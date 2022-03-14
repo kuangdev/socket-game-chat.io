@@ -537,12 +537,6 @@
                         socket.emit("register", { id:socket.id,name:PlayerName,x:px,y:py });
                     }
                 }
-
-                setTimeout(() => {
-                    if(!gamestarted){
-                        gamestart();
-                    }
-                }, 300);
             }
         });
 
@@ -556,7 +550,13 @@
                 const p_left = await players.find(item=>item.id==socket.id).x;
                 setTimeout(() => {
                     $('#game-zone').scrollLeft(p_left - ($('#game-zone').width() / 2));
-                }, 100);
+                    
+                }, 300);
+                setTimeout(()=>{
+                    if(!gamestarted){
+                        gamestart();
+                    }
+                }, 500);
             }else{
                 playerAction.init(newPlayer.id, newPlayer.name, newPlayer.x, newPlayer.y, socket.id == newPlayer.id);
                 $('.player-online').text(players.length);
